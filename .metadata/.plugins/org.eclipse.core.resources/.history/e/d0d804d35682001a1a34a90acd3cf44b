@@ -1,0 +1,15 @@
+package com.EazyPay.model;
+
+import javax.persistence.*;
+
+@Entity
+public class Wallet {
+	@Id
+	private String Upi_ID;
+	@Column(length = 12)
+	private float Wallet_Ammount;
+	@Column(length = 30)
+	private String Wallet_Pin;
+	
+
+}

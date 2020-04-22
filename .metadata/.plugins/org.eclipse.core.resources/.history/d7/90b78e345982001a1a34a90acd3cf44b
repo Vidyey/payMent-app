@@ -1,0 +1,23 @@
+package com.EazyPay.model;
+
+
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+public class Transaction {
+	
+	@Id
+	private String T_id;
+	@Column(length = 10)
+	private int T_ammount;
+	@Column(length = 30)
+	private String Caption;
+	
+	@Transient
+	@GeneratedValue
+	private int id_count;
+
+}

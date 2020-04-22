@@ -1,0 +1,39 @@
+{
+"User_Details": {
+"Cust_ID":"1",
+"Mobile_Number":7030704912,
+"Email_id":"pratikgadgeofficial@gmail.com",
+"Adhar_Number":122486400086,
+"Name":"Pratik",
+"Bank_Name":"Bank_of_maharashtra",
+"Account_Details":50000,
+"Password":"Pass@123",
+"wallet":[
+		{
+		"Upi_ID":"7030704912@pratik",
+		"Wallet_Ammount":0.00,
+		"Wallet_Pin":"0584",
+		"transaction":[]
+		}
+		]
+}
+}
+
+
+
+
+{
+    "wallet": {
+        "wallet_Ammount": 0.0,
+        "upi_ID": "703070@pdgadge",
+        "wallet_Pin": "0584"
+    },
+    "name": "pratik",
+    "password": "Pass@123",
+    "account_Details": 50000,
+    "cust_ID": 1,
+    "mobile_Number": 7030704912,
+    "adhar_Number": 123086680008,
+    "email_id": "pratikgadgeofficial@gmail.com",
+    "bank_Name": "bank of india"
+}

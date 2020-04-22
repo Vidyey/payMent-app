@@ -1,0 +1,9 @@
+insert into wallet (upi_id, wallet_ammount, wallet_pin) VALUES ('PDGADGE@7030704912', 0.00, '0584');
+
+select * from wallet;
+
+insert into User_Details(cust_id, Account_details, adhar_number, Bank_name, email_id, mobile_number,name, password, wallet_upi_id) values
+ ( 1, 5000, 128626630008, "Bank_of_india", "pratikgadgeofficial@gmail.com",7030704912, "pratik", "pass@123","pratiksha@8963");
+
+insert into Transaction_Details( t_id, caption, t_ammount, t_date, transaction_of_wallet ) values
+ ( "758802@dsgadge#balancedAdded",500, "wallet_balance_added","2014-12-29 13:59:45.461","758802@dsgadge")

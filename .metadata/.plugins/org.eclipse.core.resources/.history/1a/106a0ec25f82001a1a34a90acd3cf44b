@@ -1,0 +1,9 @@
+package com.EazyPay.repositoty;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.EazyPay.model.Transaction;
+
+public interface TransactionRepositoty extends JpaRepository<Transaction, String> {
+
+}

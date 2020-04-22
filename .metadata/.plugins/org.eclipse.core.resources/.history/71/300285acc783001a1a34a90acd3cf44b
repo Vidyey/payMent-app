@@ -1,0 +1,111 @@
+package com.EazyPay.demo.controller;
+
+import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.EazyPay.demo.entity.Transaction_Details;
+import com.EazyPay.demo.entity.User_Details;
+import com.EazyPay.demo.entity.Wallet;
+import com.EazyPay.demo.repo.TransactionRepositoty;
+import com.EazyPay.demo.repo.UserDetailRepositoty;
+import com.EazyPay.demo.repo.WalletRepositoty;
+
+@RestController
+public class WalletController {
+	@Autowired
+	private UserDetailRepositoty  userDetailRepositoty;
+	@Autowired
+	private WalletRepositoty walletRepositoty;
+	@Autowired
+	private TransactionRepositoty transactionRepositoty;
+	
+	/*
+	 * Wallet w1 = new Wallet("703070@pdgadge", 0, "0584");
+	 * 
+	 * User_Details us = new User_Details(1, 7030704,
+	 * "pratikgadgeofficial@gmail.com", 123086, "pratik", "bank of india", 50000,
+	 * "Pass@123", w1);
+	 */
+	@PostMapping("/createNewUser")
+	public User_Details addUser(@RequestBody User_Details user)
+	{
+		Wallet w1 = user.getWallet();
+		walletRepositoty.save(w1);
+		userDetailRepositoty.save(user);
+		return user;
+		
+	}
+	
+	@GetMapping("/getUser/{Mobile_Number}")
+	public String getUser(@PathVariable("Mobile_Number") BigInteger  Mobile_Number ) {
+		
+		List<User_Details> user = userDetailRepositoty.findAll();
+		
+		for (User_Details user_Details : user) {
+			if ( user_Details.getMobile_Number().equals(Mobile_Number))
+			{
+				String req_user = user_Details.getWallet().getUpi_ID();
+				 return req_user;
+			}
+			
+		}
+		
+		return "Upi not registered on this mobile Number";
+	}
+	
+	@PutMapping("/updateUser")
+	public User_Details updateUser(@RequestBody User_Details user)
+	{
+		Wallet w1 = user.getWallet();
+		walletRepositoty.save(w1);
+		userDetailRepositoty.save(user);
+		return user;
+		
+	}
+	
+	@PutMapping("/fundTranfer")
+	public String transferFund ( @RequestBody Transaction_Details transaction) {
+		
+		Transaction_Details debit =  null;
+		Transaction_Details credit = null;
+		
+		String id[] = transaction.getT_id().split("#");
+		
+		String debit_upi_id = id[0];
+		String credit_upi_id = id[2];
+		
+		debit.setT_id(transaction.getT_id());
+		debit.setT_ammount(transaction.getT_ammount());
+		debit.setCaption(transaction.getCaption());
+		debit.setT_date(Calendar.getInstance().getTime());
+		debit.setWallet(walletRepositoty.getOne(debit_upi_id));
+		
+		credit.setT_id(transaction.getT_id());
+		credit.setT_ammount(transaction.getT_ammount());
+		credit.setCaption(transaction.getCaption());
+		credit.setT_date(Calendar.getInstance().getTime());
+		credit.setWallet(walletRepositoty.getOne(credit_upi_id));
+		
+		
+		
+	
+		
+
+		
+		
+		return "fund transfer successful";
+	}
+
+}

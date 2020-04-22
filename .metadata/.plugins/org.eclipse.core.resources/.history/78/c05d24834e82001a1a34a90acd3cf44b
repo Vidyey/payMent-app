@@ -1,0 +1,5 @@
+package com.EazyPay.model;
+
+public class User_Details {
+
+}

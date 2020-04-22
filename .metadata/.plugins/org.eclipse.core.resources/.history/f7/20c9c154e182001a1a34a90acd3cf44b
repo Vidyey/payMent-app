@@ -1,0 +1,31 @@
+package com.EazyPay.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.EazyPay.demo.entity.User_Details;
+import com.EazyPay.repositoty.TransactionRepositoty;
+import com.EazyPay.repositoty.UserDetailRepositoty;
+import com.EazyPay.repositoty.WalletRepositoty;
+
+@RestController
+public class WalletController {
+	@Autowired
+	private UserDetailRepositoty  userDetailRepositoty;
+	@Autowired
+	private WalletRepositoty walletRepositoty;
+	@Autowired
+	private TransactionRepositoty transactionRepositoty;
+	
+	@PostMapping("/createNewUser")
+	public User_Details addUser(@RequestBody User_Details newUser)
+	{
+		
+		userDetailRepositoty.save(newUser);
+		return newUser;
+		
+	}
+
+}
