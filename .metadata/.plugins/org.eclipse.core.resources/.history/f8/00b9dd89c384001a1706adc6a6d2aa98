@@ -1,0 +1,37 @@
+package com.EazyPay.demo.entity;
+
+
+
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+@Entity
+public class Transaction_Details {
+	
+	@Id
+	
+	private String T_id;
+	@Column(length = 10)
+	private int T_ammount;
+	@Column(length = 30)
+	private String Caption;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(length = 20)
+	private java.util.Date T_date;
+		
+	@ManyToOne (cascade=CascadeType.ALL)
+	@JoinColumn(name="Transaction_of_wallet")
+	private Wallet wallet;
+	
+	
+}

@@ -1,0 +1,85 @@
+-   <div style="text-align: center;">
+   
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            
+        </div>
+        <div class="col-md-8">
+            
+                <fieldset>
+                    <legend class="text-center">EazyPay</legend>
+                    <table>
+                        <tr>
+                          <td><div class="card">
+                            <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
+                            <h1>EazyPay</h1>
+                            <p class="title">EazyPay.pvt.ltd</p>
+                            <p>Your Simply digital wallet</p>
+                            <div style="margin: 70px 0;">
+                              <p>Wallet  Balance</p>
+                              <a (onclick)='refreshamt()'><i class="fa fa-refresh  fa-lg "></i></a>
+                              {{amount}}
+                            </div>
+                            <p><button (click)="routelogout()">Logout</button></p>
+                        </div></td>
+                          <td>
+                          <tr>
+                                <td><div class="card">
+                                    <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
+                                    <h2>Payments</h2>
+                                    
+                                    <p>pay your <br>bills digitally</p>
+                                    
+                                    <p><button (click)="routePayment()">Payments</button></p>
+                                    
+                                </div></td>
+                           
+                                <td>
+                                    <div class="card">
+                                        <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
+                                        <h2>Add Balance</h2>
+                                        <p>Add Balance to <br>start your payment</p>
+                                        
+                                        <p><button (click)=" routeWithdraw()">Add Balance</button></p>
+                                    </div>
+                                </td>
+                            </tr>
+                          <tr>
+                              <td>
+                                <div class="card">
+                                    <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
+                                    <h2>Transactions</h2>
+                                    
+                                    <p>List of <br>transaction </p>
+                                   
+                                    <p><button (click)=" routehistry()">Show Transaction</button></p>
+                                </div>
+                              </td>
+                           
+                              <td>
+                                <div class="card">
+                                    <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
+                                    <h2>Deposit</h2>
+                                    
+                                    <p>Add Wallet Ammount<br> back to bank </p>
+                                    
+                                    <p><button (click)=" routedeposit()">Balance Deposit</button></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </td>
+                        </tr>
+                      </table>
+                    </fieldset>
+            
+        </div>
+        <div class="col-md-2">
+            
+        </div>
+    </div>
+</div>
+   

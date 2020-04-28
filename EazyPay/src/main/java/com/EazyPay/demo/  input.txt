@@ -24,17 +24,18 @@
 
 {
     "wallet": {
+	    "mobile_Number": 7588025760,
+	    "adhar_Number": 123086654987,
+	    "email_id": "dsgadgeoffice@gmail.com",
+    	"name": "dattatraya",
         "wallet_Ammount": 0.0,
-        "upi_ID": "758802@dsgadge",
         "wallet_Pin": "0584"
     },
-    "name": "dattatraya",
+    
     "password": "Pass@123",
     "account_Details": 100000,
     "cust_ID": 2,
-    "mobile_Number": 7588025760,
-    "adhar_Number": 123086654987,
-    "email_id": "dsgadgeoffice@gmail.com",
+    
     "bank_Name": "bank of india"
 }
 

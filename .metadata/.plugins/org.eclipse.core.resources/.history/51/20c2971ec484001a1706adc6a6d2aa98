@@ -1,0 +1,32 @@
+package com.EazyPay.demo.entity;
+
+import java.math.BigInteger;
+import java.util.List;
+
+import javax.persistence.*;
+
+@Entity
+public class Wallet {
+	@Id
+	@Column(length = 10, unique = true, nullable = false)
+	private BigInteger Mobile_Number;
+	@Column(length = 30, unique = true, nullable = false)
+	private String Email_id;
+	
+	@Column(length = 12, unique = true, nullable = false)
+	private BigInteger Adhar_Number;
+	@Column(length = 30)
+	private String Name; 
+	@Column(length = 12)
+	private float Wallet_Ammount;
+	@Column(length = 8)
+	private String Wallet_Pin;
+	@OneToMany(targetEntity = Transaction_Details.class, mappedBy="wallet")
+	private List<Transaction_Details> transaction;
+	
+	
+	
+	
+	
+
+}

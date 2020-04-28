@@ -1,0 +1,5 @@
+package com.EazyPay.demo.entity;
+
+public class Transaction_Details {
+
+}

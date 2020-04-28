@@ -1,0 +1,48 @@
+-   <div style="text-align: center;">
+   
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            
+        </div>
+        <div class="col-md-6">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Add Balance</legend>
+
+                    <!-- <div class="form-group">
+                        <span class="req"><small>
+                            required*<br></small></span>
+                         <label for="Mobile Number"><span class="req">* </span> Wallet Mobile Number <small>Please Enter Your Wallet Mobile Number.</small> </label>
+                                <input class="form-control" type="text" [(ngModel)]="wallet1.mobile_Number" name="mobile_Number" id="MobileNumber"
+                                placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="Amount"><span class="req">* </span> Amount </label>
+                        <input class="form-control" type="text" [(ngModel)]="amount" name="Name" id="Name"
+                            placeholder="Enter Transfer Amount" required />
+                        <div id="errLast"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="Wallet Pin"><span class="req">* </span> Wallet Pin <small>Please Enter Security Pin </small> </label>
+                        <input required type="password" [(ngModel)]="password" name="wallet_Pin" id="Wallet_Pin"
+                            class="form-control phone" maxlength="10" placeholder="Please Enter 4 Digit Pin " />
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" name="submit_Signup" value="Add Balance" (click)="bankwithdrawNow()">
+                    </div>
+                </fieldset>
+            </form>
+            
+        </div>
+        <div class="col-md-3">
+            
+        </div>
+    </div>
+</div>
+   

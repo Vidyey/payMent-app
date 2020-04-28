@@ -1,0 +1,63 @@
+<div style="text-align: center;">
+
+{{user}}
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            
+        </div>
+        <div class="col-md-6">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Fund Transfer</legend>
+
+                    <span class="req"><small>
+                        required*<br></small></span>
+                    <!-- <div class="form-group">
+                        
+                         <label for="Mobile Number"><span class="req">* </span> Wallet Mobile Number <small>Please Enter Your Wallet Mobile Number.</small> </label>
+                                <input class="form-control" type="text" [(ngModel)]="wallet1.mobile_Number" name="mobile_Number" id="MobileNumber"
+                                placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="Mobile Number"><span class="req">* </span> Receiver Mobile Number <small>Please Enter Your Receiver Mobile Number.</small> </label>
+                        <input class="form-control" type="text" [(ngModel)]="receiver" name="mobile_Number" id="ReceiverNumber"
+                        placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name"><span class="req">* </span> Amount </label>
+                        <input class="form-control" type="text" [(ngModel)]="amount" name="Amount" id="Amount"
+                            placeholder="Enter Transfer Amount" required />
+                        <div id="errLast"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Adhar Number"><span class="req">* </span> Caption :<small> Caption your transaction </small> </label>
+                        <input class="form-control" type="text" [(ngModel)]="caption" name="Caption" id="Caption"
+                            placeholder="Fund Transfer" required />
+                        <div id="errLast"></div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for="Adhar Number"><span class="req">* </span> Wallet-Pin : </label>
+                        <input class="form-control" type="password" [(ngModel)]="password" name="Wpin" id="wpin"
+                            placeholder="Security Code" required />
+                        <div id="errLast"></div>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" name="submit_Signup" value="Pay Amount" (click)="fundtransferNow()">
+                    </div>
+                </fieldset>
+            </form>
+            
+        </div>
+        <div class="col-md-3">
+            
+        </div>
+    </div>
+</div>

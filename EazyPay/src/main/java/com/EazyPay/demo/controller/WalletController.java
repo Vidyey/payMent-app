@@ -1,99 +1,113 @@
 package com.EazyPay.demo.controller;
 
-import java.math.BigInteger;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.EazyPay.demo.entity.Transaction_Details;
-import com.EazyPay.demo.entity.User_Details;
+
 import com.EazyPay.demo.entity.Wallet;
 import com.EazyPay.demo.repo.TransactionRepositoty;
-import com.EazyPay.demo.repo.UserDetailRepositoty;
+
 import com.EazyPay.demo.repo.WalletRepositoty;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class WalletController {
-	@Autowired
-	private UserDetailRepositoty  userDetailRepositoty;
+	
 	@Autowired
 	private WalletRepositoty walletRepositoty;
 	@Autowired
 	private TransactionRepositoty transactionRepositoty;
 	
-	/*
-	 * Wallet w1 = new Wallet("703070@pdgadge", 0, "0584");
-	 * 
-	 * User_Details us = new User_Details(1, 7030704,
-	 * "pratikgadgeofficial@gmail.com", 123086, "pratik", "bank of india", 50000,
-	 * "Pass@123", w1);
-	 */
-	@PostMapping("/createNewUser")
-	public User_Details addUser(@RequestBody User_Details user)
+	@CrossOrigin
+	@PostMapping(path="/createNewUser",consumes ="application/json", produces = "application/json")
+	public Wallet addUser(@RequestBody Wallet newuser)
 	{
-		Wallet w1 = user.getWallet();
-		walletRepositoty.save(w1);
-		userDetailRepositoty.save(user);
-		return user;
+		System.out.println(newuser); //
+		newuser.setWallet_Ammount(0);
+		walletRepositoty.save(newuser);
+		return newuser;
 		
 	}
 	
 	@GetMapping("/getUser/{Mobile_Number}")
-	public String getUser(@PathVariable("Mobile_Number") BigInteger  Mobile_Number ) {
-		
-		List<User_Details> user = userDetailRepositoty.findAll();
-		
-		for (User_Details user_Details : user) {
-			if ( user_Details.getMobile_Number().equals(Mobile_Number))
-			{
-				String req_user = user_Details.getWallet().getUpi_ID();
-				 return req_user;
-			}
-			
-		}
-		
-		return "Upi not registered on this mobile Number";
+	public Wallet getUser(@PathVariable String Mobile_Number)
+	{
+			//System.out.println(Mobile_Number);
+			Wallet w1 =  walletRepositoty.getOne(Mobile_Number);
+			System.out.println(w1);
+			return w1;
 	}
 	
+	
+	
 	@PutMapping("/updateUser")
-	public User_Details updateUser(@RequestBody User_Details user)
+	public Wallet updateUser(@RequestBody Wallet newuser)
 	{
-		Wallet w1 = user.getWallet();
-		walletRepositoty.save(w1);
-		userDetailRepositoty.save(user);
-		return user;
+		
+		walletRepositoty.save(newuser);
+		return newuser;
 		
 	}
 	
 	@PutMapping("/fundTransfer/{send_upi_id}/{rec_upi_id}/{ammount}/{caption}")
-	public String transferFund (@PathVariable String send_upi_id,@PathVariable String rec_upi_id, @PathVariable int ammount, @PathVariable String caption) 
+	public String transferFund (@PathVariable("send_upi_id") String send_upi_id,@PathVariable("rec_upi_id") String rec_upi_id, @PathVariable int ammount, @PathVariable String caption) 
 	{
 		
-		long count = transactionRepositoty.count();
-		count+=1;
 		Wallet send = walletRepositoty.getOne(send_upi_id);
+		
+		System.out.println("this is sending onj :- "+send);
 		Wallet rec = walletRepositoty.getOne(rec_upi_id);
+		
+		System.out.println("this is reciver :- "+ rec);
 		
 		if ( send.getWallet_Ammount() >= ammount) {
 		
-		String id = send_upi_id+"#"+count+"#"+rec_upi_id;
-		Transaction_Details sendbal = new Transaction_Details(id,ammount, caption, Calendar.getInstance().getTime() ,0, send);
-		Transaction_Details recbal = new Transaction_Details(id,ammount, caption, Calendar.getInstance().getTime() ,0, rec);
+		String id = send_upi_id+"#"+Calendar.getInstance().getTime()+"#"+rec_upi_id;
+		
+		//---------------- debit process --------------
+		Transaction_Details sendbal = new Transaction_Details(id,ammount, caption, Calendar.getInstance().getTime());
 		send.setWallet_Ammount(send.getWallet_Ammount() - sendbal.getT_ammount());
-		rec.setWallet_Ammount(rec.getWallet_Ammount() + recbal.getT_ammount());
+		
+		List<Transaction_Details> t = send.getTransaction();
+		t.add(sendbal);
+		send.setTransaction(t);
 		
 		transactionRepositoty.save(sendbal);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// ----------------credit process-------------------------
+		String id1 = send_upi_id+"#"+Calendar.getInstance().getTime()+"#"+rec_upi_id;
+		Transaction_Details recbal = new Transaction_Details(id1,ammount, caption, Calendar.getInstance().getTime());
+		
+		rec.setWallet_Ammount(rec.getWallet_Ammount() + recbal.getT_ammount());
+		
+		
+		
+		List<Transaction_Details> t2 = rec.getTransaction();
+		t2.add(recbal);
+		rec.setTransaction(t2);
+		
+		
 		transactionRepositoty.save(recbal);
+		//----------------------------------------------------
+		
+		//wallet update
+		
 		walletRepositoty.save(send);
 		walletRepositoty.save(rec);
 	
@@ -101,65 +115,27 @@ public class WalletController {
 		}
 		else
 		{
-			return "transaction failed";
+			return "transaction failed  'Unsufficient balance'. ";
 		}
-		
-		/*
-		 * Transaction_Details debit = null; Transaction_Details credit = null;
-		 * 
-		 * String id[] = transaction.getT_id().split("#");
-		 * 
-		 * String debit_upi_id = id[0]; String credit_upi_id = id[2];
-		 * 
-		 * debit.setT_id(transaction.getT_id());
-		 * debit.setT_ammount(transaction.getT_ammount());
-		 * debit.setCaption(transaction.getCaption());
-		 * debit.setT_date(Calendar.getInstance().getTime());
-		 * debit.setWallet(walletRepositoty.getOne(debit_upi_id));
-		 * 
-		 * credit.setT_id(transaction.getT_id());
-		 * credit.setT_ammount(transaction.getT_ammount());
-		 * credit.setCaption(transaction.getCaption());
-		 * credit.setT_date(Calendar.getInstance().getTime());
-		 * credit.setWallet(walletRepositoty.getOne(credit_upi_id));
-		 * 
-		 * transactionRepositoty.save(debit); transactionRepositoty.save(credit);
-		 * 
-		 * // debit from wallet
-		 * 
-		 * Wallet debit_wallet = walletRepositoty.getOne(debit_upi_id);
-		 * debit_wallet.setWallet_Ammount(debit_wallet.getWallet_Ammount() -
-		 * transaction.getT_ammount()); //debit_wallet.getWallet_Ammount() -
-		 * transaction.getT_ammount());
-		 * 
-		 * walletRepositoty.save(debit_wallet);
-		 * 
-		 * //credit to the wallet
-		 * 
-		 * Wallet credit_wallet = walletRepositoty.getOne(credit_upi_id);
-		 * credit_wallet.setWallet_Ammount(credit_wallet.getWallet_Ammount() +
-		 * transaction.getT_ammount());
-		 * 
-		 * walletRepositoty.save(credit_wallet);
-		 */
 		
 		
 	}
 
 	
-	@PutMapping("/addBalanceToWallet/{upi_id}/{ammount}")
+	@PutMapping("/addBalanceToWallet/{Mobile_Number}/{ammount}")
 
-	public String addBalanceToWallet(@PathVariable String upi_id, @PathVariable int ammount)
+	public String addBalanceToWallet(@PathVariable("Mobile_Number") String upi_id, @PathVariable int ammount)
 	{
-		long count = transactionRepositoty.count();
-		count+=1;
 		Wallet w1 = walletRepositoty.getOne(upi_id);
 		
-		String id = upi_id+"#"+count+"#balanceAdded";
+		String id = upi_id+"#"+Calendar.getInstance().getTime()+"#balanceAdded";
 		
-		Transaction_Details addbal = new Transaction_Details(id,ammount, "wallet_balance_added", Calendar.getInstance().getTime() , 0, w1);
+		Transaction_Details addbal = new Transaction_Details(id,ammount, "wallet_balance_added", Calendar.getInstance().getTime());
 		
 		w1.setWallet_Ammount(w1.getWallet_Ammount() + addbal.getT_ammount());
+		List<Transaction_Details> t = w1.getTransaction();
+		t.add(addbal);
+		w1.setTransaction(t);
 		
 		transactionRepositoty.save(addbal);
 		walletRepositoty.save(w1);
@@ -170,10 +146,15 @@ public class WalletController {
 		
 	}
 	
-	@GetMapping("/getTransaction")
-	public List<Transaction_Details> getTransaction()
+	@GetMapping("/getTransaction/{Mobile_Number}")
+	public List<Transaction_Details> getTransaction(@PathVariable("Mobile_Number") String upi_id)
 	{
-		return transactionRepositoty.findAll();
+		
+		  Wallet w1 = walletRepositoty.getOne(upi_id); 
+		  return w1.getTransaction();
+		 
+		 
+		
 	}
 
 
@@ -182,19 +163,20 @@ public class WalletController {
 	{
 		
 	
-		long count = transactionRepositoty.count();
-		count+=1;
+		
 		Wallet w1 = walletRepositoty.getOne(upi_id);
 		
 		if (w1.getWallet_Ammount()>=ammount)
 		{
 
-		String id = upi_id+"#"+count+"#bankDeposited";
+		String id = upi_id+"#"+Calendar.getInstance().getTime()+"#bankDeposited";
 
-		Transaction_Details addbal = new Transaction_Details(id,ammount, "wallet_balance_added", Calendar.getInstance().getTime() , 0, w1);
+		Transaction_Details addbal = new Transaction_Details(id,ammount, "wallet_balance_Deposited", Calendar.getInstance().getTime());
 
 		w1.setWallet_Ammount(w1.getWallet_Ammount() - addbal.getT_ammount());
-
+		List<Transaction_Details> t = w1.getTransaction();
+		t.add(addbal);
+		w1.setTransaction(t);
 		transactionRepositoty.save(addbal);
 		walletRepositoty.save(w1);
 		return "Balance added to Bank successful...";

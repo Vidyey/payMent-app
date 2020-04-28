@@ -1,0 +1,37 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            
+        </div>
+        <div class="col-md-6">
+            <form>
+                <fieldset>
+                    <legend class="text-center">Sign In.</legend>
+
+                    <div class="form-group">
+                        <span class="req"><small>
+                            required*<br></small></span>
+                         <label for="Mobile Number"><span class="req">* </span> Mobile Number <small></small> </label>
+                                <input class="form-control" type="text" [(ngModel)]="username" name="username" id="username"
+                                placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Email id"><span class="req">* </span> Pin </label>
+                        <input class="form-control" type="password" [(ngModel)]="password" name="password" id="password" required
+                            placeholder="Enter Security Pin" />
+                        <div id="errFirst"></div>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" name="submit_Signup" value="Login" (click)="checkLogin()">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-md-3">
+            
+        </div>
+    </div>
+</div>
