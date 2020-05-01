@@ -1,9 +1,0 @@
-package com.EazyPay.repositoty;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.EazyPay.model.Wallet;
-
-public interface WalletRepositoty extends JpaRepository<Wallet, String> {
-
-}

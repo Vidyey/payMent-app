@@ -59,7 +59,7 @@ export class DashBoardComponent implements OnInit {
 
     if (this.loginService.isUserLoggedIn()
     ) {
-      this.router.navigate(['showTransaction']);
+      this.router.navigate(['getTransaction']);
       
     } else
     this.router.navigate(['login']);

@@ -28,9 +28,8 @@ export class BankWithdrawComponent implements OnInit {
   bankwithdrawNow(){
      
     this.user = sessionStorage.getItem('username');
-    this.loginservice.getWalletDetail(this.user).subscribe((data)=>this.wallet=data);
-
-    if (this.wallet.wallet_Pin === this.password)
+    let wpin = sessionStorage.getItem('pin');
+    if (wpin === this.password)
     {
       this.service.addbal(this.user,this.amount).subscribe((data)=>this.Message=data);
     }

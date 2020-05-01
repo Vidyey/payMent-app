@@ -40,5 +40,5 @@ export class AuthenticationService {
   public getWalletDetail(username) :Observable<any>
   { 
       return this.httpClient.get("http://localhost:9090/getUser/"+username );  
-  }
+  } 
 }

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  wallet1 : Wallet = new Wallet("","","","","","");
+  wallet1 : Wallet = new Wallet("","","","","","",null);
 
   message : any;
 

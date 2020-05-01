@@ -11,38 +11,41 @@
         <div class="col-md-8">
             
                 <fieldset>
-                    <legend class="text-center">EazyPay</legend>
+                    <!-- <legend class="text-center">EazyPay</legend> -->
                     <table>
                         <tr>
                           <td><div class="card">
-                            <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
+                            <img src="assets/logo/l2.jpg" alt="logo" width="100" height="100"  class="center"> 
                             <h1>EazyPay</h1>
-                            <p class="title">EazyPay.pvt.ltd</p>
-                            <p>Your Simply digital wallet</p>
-                            <div style="margin: 70px 0;">
+                            <!-- <p class="title">EazyPay.pvt.ltd</p>
+                            <p>Your Simply digital wallet</p> -->
+                            <div style="margin: 35px 0;">
                               <p>Wallet  Balance</p>
-                              <a (onclick)='refreshamt()'><i class="fa fa-refresh  fa-lg "></i></a>
-                              {{amount}}
+                           
+                                <b><i class='fa fa-inr'>  :  {{amount}}</i></b>
+                              <button class="btn" (click)="refreshamt()"><i class="fa fa-refresh"></i></button>
+                             
+                            
                             </div>
                             <p><button (click)="routelogout()">Logout</button></p>
                         </div></td>
                           <td>
                           <tr>
                                 <td><div class="card">
-                                    <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
-                                    <h2>Payments</h2>
+                                   <img src="assets/logo/fundtransfer.png" alt="John" width="100" height="100"  class="center"> 
+                                    <!-- <h2>Payments</h2>
                                     
                                     <p>pay your <br>bills digitally</p>
-                                    
+                                     -->
                                     <p><button (click)="routePayment()">Payments</button></p>
                                     
                                 </div></td>
                            
                                 <td>
                                     <div class="card">
-                                        <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
-                                        <h2>Add Balance</h2>
-                                        <p>Add Balance to <br>start your payment</p>
+                                      <img src="assets/logo/withdraw.png" alt="John" width="100" height="100"  class="center"> 
+                                      <!-- <h2>Add Balance</h2>
+                                        <p>Add Balance to <br>start your payment</p> -->
                                         
                                         <p><button (click)=" routeWithdraw()">Add Balance</button></p>
                                     </div>
@@ -51,10 +54,10 @@
                           <tr>
                               <td>
                                 <div class="card">
-                                    <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
-                                    <h2>Transactions</h2>
+                                  <img src="assets/logo/list2.png" alt="John" width="100" height="100"  class="center"> 
+                                  <!-- <h2>Transactions</h2>
                                     
-                                    <p>List of <br>transaction </p>
+                                    <p>List of <br>transaction </p> -->
                                    
                                     <p><button (click)=" routehistry()">Show Transaction</button></p>
                                 </div>
@@ -62,11 +65,11 @@
                            
                               <td>
                                 <div class="card">
-                                    <!-- <img src="G:\Parallel_Project\WalletUI\src\logo\eazypay4.jpg" alt="John" style="width:100%"> -->
-                                    <h2>Deposit</h2>
+                                  <img src="assets/logo/deposit.png" alt="John" width="100" height="100"  class="center"> 
+                                  <!-- <h2>Deposit</h2>
                                     
                                     <p>Add Wallet Ammount<br> back to bank </p>
-                                    
+                                     -->
                                     <p><button (click)=" routedeposit()">Balance Deposit</button></p>
                                 </div>
                               </td>

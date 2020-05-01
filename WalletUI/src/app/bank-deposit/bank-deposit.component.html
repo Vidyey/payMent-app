@@ -22,15 +22,15 @@
                                 placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
                     </div> -->
 
-                    <div class="form-group">
-                        <label for="name"><span class="req">* </span> Amount </label>
+                    <div class="form-group" >
+                        <label for="name"><span class="req">* </span> <b>Amount</b> </label>
                         <input class="form-control" type="text" [(ngModel)]="amount" name="Name" id="Name"
                             placeholder="Enter Transfer Amount" required />
                         <div id="errLast"></div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="Wallet Pin"><span class="req">* </span> Wallet Pin <small>Please Enter Security Pin </small> </label>
+                        <label for="Wallet Pin"><span class="req">* </span> <b>Wallet Pin </b> <small> Please Enter Security Pin </small> </label>
                         <input required type="password" [(ngModel)]="password" name="wallet_Pin" id="Wallet_Pin"
                             class="form-control phone" maxlength="10" placeholder="Please Enter 4 Digit Pin " />
                     </div>

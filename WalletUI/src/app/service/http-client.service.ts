@@ -9,17 +9,18 @@ export class Wallet{
     public adhar_Number:String,
     public name:String,
     public wallet_Ammount : string,
-    public wallet_Pin:string
+    public wallet_Pin:string,
+    public transaction : Transacion_Details
   ){}
 }
 
 export class Transacion_Details{
 constructor(
-  public T_id : string,
-  public T_ammount:string,
+  public t_id : string,
+  public t_ammount:string,
   public caption:string,
-  public T_date :string,
-  public wallet : Wallet
+  public t_date :string,
+ 
 ){}
 
 }
@@ -69,6 +70,11 @@ public trasfer(user, receiver, amount, caption):Observable<any>{
   
 }
 
+public getTransactionList(user):Observable<any>{
+
+  return this.httpClient.get("http://localhost:9090/getTransaction/"+user);
+}
+ 
 
 }
 

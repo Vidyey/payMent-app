@@ -40,7 +40,7 @@ export class FundTransferComponent implements OnInit {
       this.service.trasfer(this.user,this.receiver,this.amount,this.caption).subscribe((data)=>this.Message=data);
     }
 
-    alert(this.Message);
+    alert("sucessful payment trasfer");
     this.router.navigate(['home'])
 
   }

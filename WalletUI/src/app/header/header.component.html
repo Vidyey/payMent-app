@@ -1,14 +1,18 @@
+<div class="container">
 <header>
-    <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
-    <div><a href="#" class="navbar-brand"><img src="../assets/logo/eazypay4.jpg" alt="ewallet" style="width:25%"></a></div>
+    <nav class ="navbar navbar-expand-md navbar-dark bg-info">
+    <div><a href="#" class="navbar-brand"><img src="assets/logo/l2.jpg" alt="John" width="70" height="70"  class="center"></a></div>
     
     <ul class="navbar-nav">
        
       <!-- <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/" class="nav-link">View Employees</a></li>
       <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/addemployee" class="nav-link">Add New Employee</a></li> -->
       <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
+      <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/cre  ateNewUser/login" class="nav-link">SignUp</a></li>
+
       <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
     
     </ul>
       </nav>
-    </header>
+</header>
+</div>

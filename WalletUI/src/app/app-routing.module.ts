@@ -20,7 +20,7 @@ const routes: Routes = [
   {path :"addBalanceToWallet",component:BankWithdrawComponent,canActivate:[AuthGaurdService] },
   {path:"login",component:LoginComponent},
   {path:"logout", component:LogoutComponent,canActivate:[AuthGaurdService] },
-  {path:"showTransaction",component:TransactionHistoryComponent}
+  {path:"getTransaction",component:TransactionHistoryComponent}
 
 ];
 

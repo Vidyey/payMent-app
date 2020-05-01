@@ -2,21 +2,20 @@ body {
     padding-top:50px;
 }
 fieldset {
-    border: thick solid rgb(238, 12, 12); 
-    border-radius: 20px;
+    border: thin solid #ccc; 
+    border-radius: 40px;
     padding: 20px;
     padding-left: 40px;
-    background: #8f858585;
+    background: #7bacb34d;
 }
 legend {
-   color: rgb(255, 255, 255);
-   background: #000000;
-   border-radius: 10px;
-   
+   color: rgb(90, 149, 163);
 }
+
 .form-control {
+    text-align: center;
     width: 95%;
-    border: thin solid rgb(238, 12, 12); 
+    border-radius: 100px;
 }
 label small {
     color: #678 !important;
