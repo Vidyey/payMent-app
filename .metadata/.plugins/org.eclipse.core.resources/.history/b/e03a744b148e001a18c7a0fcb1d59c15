@@ -1,0 +1,12 @@
+package com.EazyPay.demo.Exception;
+
+import java.util.Date;
+
+public class WalletErrorDetails {
+	
+	private Date timestamp;
+	private String message;
+	private String errordetails;
+	
+
+}

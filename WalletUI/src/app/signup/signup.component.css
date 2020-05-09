@@ -6,21 +6,47 @@ fieldset {
     border-radius: 40px;
     padding: 20px;
     padding-left: 40px;
-    background: #7bacb34d;
+    background: #7bacb39d;
 }
 legend {
-   color: rgb(90, 149, 163);
+   color: rgb(255, 255, 255);
 }
 
 .form-control {
     text-align: center;
-    width: 95%;
+    
+    /* width: 95%; */
     border-radius: 100px;
 }
 label small {
     color: #678 !important;
 }
+
+label{
+    color: rgb(255, 255, 255);
+}
 span.req {
     color:maroon;
     font-size: 112%;
 }
+
+
+/*+++++++++++++++++++++++++++++*/
+
+.hero-image {
+    background-image: linear-gradient(rgba(80, 168, 184, 4.5), rgba(80, 168, 184, 0.5)), url("/assets/logo/signup.svg");
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+  /* .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  } */

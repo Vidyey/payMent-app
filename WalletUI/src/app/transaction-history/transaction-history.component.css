@@ -92,5 +92,16 @@ body {
       background-color: rgba(164, 167, 177, 0.432);
     } */
   
+    
+/*+++++++++++++++++++++++++++++*/
+
+.hero-image {
+  background-image: linear-gradient(rgba(80, 168, 184, 4.5), rgba(80, 168, 184, 0.5)), url("/assets/logo/signup.svg");
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
   
   

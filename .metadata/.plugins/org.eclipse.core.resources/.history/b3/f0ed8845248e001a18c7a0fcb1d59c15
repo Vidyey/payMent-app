@@ -1,0 +1,20 @@
+package com.EazyPay.demo.Exception;
+
+
+
+@ControllerAdvice
+public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+	
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex,
+			WebRequest request) {
+		WalletErrorDetails wErrorDetails = new WalletErrorDetails(new Date(), ex.getMessage(),
+				request.getDescription(false));
+
+		return new ResponseEntity<>(wErrorDetails, HttpStatus.NOT_FOUND);
+
+	}
+	
+
+  }

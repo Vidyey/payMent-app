@@ -1,0 +1,85 @@
+package com.EazyPay.demo.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.EazyPay.demo.Exception.UserNotFoundException;
+import com.EazyPay.demo.Logger.GlobalLogger;
+import com.EazyPay.demo.dao.WalletPayDao;
+import com.EazyPay.demo.entity.Transaction_Details;
+import com.EazyPay.demo.entity.Wallet;
+@Service
+public class WalletPayServiceImpl implements WalletPayService {
+
+private Logger logger=GlobalLogger.getLogger(WalletPayServiceImpl.class);
+	
+	@Autowired
+	WalletPayDao dao;
+
+	@Override
+	public Wallet addUser(Wallet newuser) {
+		// TODO Auto-generated method stub
+		String method="addUser(Wallet newuser)";
+		logger.info(method + "called..");
+		
+		return dao.addUser(newuser);
+	}
+
+	@Override
+	public Optional<Wallet> getUser(String Mobile_Number) throws UserNotFoundException {
+		// TODO Auto-generated method stub
+		String method="getUser(String Mobile_Number)";
+		logger.info(method + "called..");
+		
+		return dao.getUser(Mobile_Number);
+	}
+
+	@Override
+	public Wallet updateUser(Wallet newuser) {
+		// TODO Auto-generated method stub
+		String method="updateUser(Wallet newuser)";
+		logger.info(method + "called..");
+		
+		return dao.updateUser(newuser);
+	}
+
+	@Override
+	public String transferFund(String send_upi_id, String rec_upi_id, int ammount, String caption) {
+		// TODO Auto-generated method stub
+		String method="transferFund(String send_upi_id,String rec_upi_id,int ammount, String caption)";
+		logger.info(method + "called..");
+		
+		return dao.transferFund(send_upi_id, rec_upi_id, ammount, caption);
+	}
+
+	@Override
+	public String addBalanceToWallet(String upi_id, int ammount) {
+		// TODO Auto-generated method stub
+		String method="addBalanceToWallet(String upi_id,int ammount)";
+		logger.info(method + "called..");
+		
+		return dao.addBalanceToWallet(upi_id, ammount);
+	}
+
+	@Override
+	public List<Transaction_Details> getTransaction(String upi_id) {
+		// TODO Auto-generated method stub
+		String method="getTransaction(String upi_id)";
+		logger.info(method + "called.."); 
+		
+		return dao.getTransaction(upi_id);
+	}
+
+	@Override
+	public String addBalanceToBank(String upi_id, int ammount) {
+		// TODO Auto-generated method stub
+		String method="addBalanceToBank(String upi_id,int ammount)";
+		logger.info(method + "called.."); 	
+		
+		return dao.addBalanceToBank(upi_id, ammount);
+	}
+}

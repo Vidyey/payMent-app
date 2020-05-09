@@ -1,0 +1,11 @@
+package com.EazyPay.demo.Service;
+
+import java.util.List;
+
+import com.EazyPay.demo.entity.Transaction_Details;
+import com.EazyPay.demo.entity.Wallet;
+
+public class WalletPayServiceImpl implements WalletPayService {
+
+	
+}

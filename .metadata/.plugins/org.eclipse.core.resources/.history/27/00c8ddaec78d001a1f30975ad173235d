@@ -1,0 +1,12 @@
+package com.EazyPay.demo.dao;
+
+import java.util.List;
+
+import com.EazyPay.demo.entity.Transaction_Details;
+import com.EazyPay.demo.entity.Wallet;
+
+public class WalletPayDaoImpl implements WalletPayDao {
+
+	
+
+}

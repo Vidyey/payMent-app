@@ -1,0 +1,31 @@
+body {
+    padding-top:50px;
+}
+fieldset {
+    border: thin solid #ccc; 
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background: #7bacb34d;
+}
+legend {
+   color: rgb(90, 149, 163);
+}
+
+.form-control {
+    text-align: center;
+    width: 95%;
+    border-radius: 100px;
+}
+label small {
+    color: #678 !important;
+}
+
+.user123 {
+    text-align: center;
+    color: rgb(255, 255, 255) !important;
+}
+span.req {
+    color:maroon;
+    font-size: 112%;
+}

@@ -1,6 +1,8 @@
 
 
 <div class="container">
+    <div class="hero-image">
+        <div class="hero-text">
     <div class="row">
         <div class="col-md-3">
             
@@ -13,39 +15,54 @@
                     <div class="form-group">
                         <span class="req"><small>
                             required*<br></small></span>
-                         <label for="Mobile Number"><span class="req">* </span> Mobile Number <small>This will be your login user
-                                name</small> </label>
-                                <input class="form-control" type="text" [(ngModel)]="wallet1.mobile_Number" name="mobile_Number" id="MobileNumber"
-                                placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
+                         <label for="Mobile Number"><span class="req">* </span> Mobile Number <small></small> </label>
+                                <input class="form-control" type="text" [(ngModel)]="wallet1.mobile_Number" name="username" id="username"
+                                placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required #usernamecontrol ="ngModel" [class.is-invalid]="usernamecontrol.invalid && usernamecontrol.touched"/>
+                                <div *ngIf="usernamecontrol.invalid && usernamecontrol.touched">
+                                    <span class="req"><i><small>Enter valid Mobile Number</small></i></span>
+                                </div>
                     </div>
+
+                   
 
                     <div class="form-group">
                         <label for="Email id"><span class="req">* </span> Email: </label>
-                        <input class="form-control" type="text" [(ngModel)]="wallet1.email_id" name=" email_id" id="Email_id" required
-                            placeholder="Enter valid email address" />
-                        <div id="errFirst"></div>
+                        <input class="form-control" type="text" [(ngModel)]="wallet1.email_id" name=" email_id" id="Email_id" required #mailcontrol ="ngModel" [class.is-invalid]="mailcontrol.invalid && mailcontrol.touched"
+                            placeholder="Enter valid email address"  />
+                            <div *ngIf="mailcontrol.invalid && mailcontrol.touched">
+                                <span class="req"><i><small>Enter valid Email address</small></i></span>
+                            </div>
                     </div>
 
                     <div class="form-group">
                         <label for="name"><span class="req">* </span> Name : </label>
                         <input class="form-control" type="text" [(ngModel)]="wallet1.name" name="Name" id="Name"
-                            placeholder="Enter Your Name" required />
-                        <div id="errLast"></div>
+                            placeholder="Enter Your Name" required  #namecontrol ="ngModel" [class.is-invalid]="namecontrol.invalid && namecontrol.touched"/>
+                            <div *ngIf="namecontrol.invalid && namecontrol.touched">
+                                <span class="req"><i><small>Enter valid user name</small></i></span>
+                            </div>
                     </div>
 
                     <div class="form-group">
                         <label for="Adhar Number"><span class="req">* </span> Adhar Number :<small>Please Enter valid Adhar Number. This may use for KYC of user </small> </label>
                         <input class="form-control" type="text" [(ngModel)]="wallet1.adhar_Number" name="adhar_Number" id="Adhar_Number"
-                            placeholder="Enter your 12 digit Adhar Number (xxxxxxxxxxxx)" required />
-                        <div id="errLast"></div>
+                            placeholder="Enter your 12 digit Adhar Number (xxxxxxxxxxxx)" required #adharcontrol ="ngModel" [class.is-invalid]="adharcontrol.invalid && adharcontrol.touched"/>
+                            <div *ngIf="adharcontrol.invalid && adharcontrol.touched">
+                                <span class="req"><i><small>Enter valid Adhar_Number</small></i></span>
+                            </div>
                     </div>
 
-                    
                     <div class="form-group">
-                        <label for="Wallet Pin"><span class="req">* </span> Wallet Pin <small>This is security pin Please dont share with other </small> </label>
-                        <input required type="text" [(ngModel)]="wallet1.wallet_Pin" name="wallet_Pin" id="Wallet_Pin"
-                            class="form-control phone" maxlength="10" placeholder="Please Enter 4 Digit Pin " />
+                        <label for="Email id"><span class="req">* </span> Pin </label>
+                        <input class="form-control" type="password" [(ngModel)]="wallet1.wallet_Pin" name="password" id="password" required #pincontrol="ngModel" [class.is-invalid]="pincontrol.invalid && pincontrol.touched"
+                            placeholder="Enter Security Pin" />
+                            <div *ngIf="pincontrol.invalid && pincontrol.touched">
+                                <span class="req"><i><small>Enter valid Security Pin</small></i></span>
+                            </div>
                     </div>
+
+                    <!-- -------------------------------------------- -->
+                   
                     <div class="form-group">
                         <input class="btn btn-success" type="submit" name="submit_Signup" value="Signup" (click)="signupNow()">
                     </div>
@@ -57,4 +74,6 @@
             
         </div>
     </div>
+</div>
+</div>
 </div>

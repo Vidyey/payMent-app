@@ -8,6 +8,7 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class HeaderComponent implements OnInit {
 
+  
   constructor( public loginService:AuthenticationService) { }
 
   ngOnInit(): void {
@@ -16,5 +17,8 @@ export class HeaderComponent implements OnInit {
   ngOnChanges(){
     
   }
+
+  user = sessionStorage.getItem('username');
+  name = sessionStorage.getItem('person');
 
 }

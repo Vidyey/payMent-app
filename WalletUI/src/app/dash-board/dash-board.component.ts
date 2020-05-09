@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DashBoardComponent implements OnInit {
 
-  amount:String;
+  amount:string;
   wallet:Wallet;
 
   constructor(
@@ -24,7 +24,7 @@ export class DashBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.amount = this.refreshamt();
+    this.amount = sessionStorage.getItem('amount')
     
   }
 
@@ -79,6 +79,8 @@ export class DashBoardComponent implements OnInit {
     let user = sessionStorage.getItem('username');
     this.loginService.getWalletDetail(user).subscribe((data)=>this.wallet=data);
     this.amount = this.wallet.wallet_Ammount;
+    sessionStorage.setItem('amount',this.amount);
+
 
     return this.amount;
 

@@ -1,0 +1,5 @@
+package com.EazyPay.demo.Exception;
+
+public class CustomGlobalExceptionHandler {
+
+}

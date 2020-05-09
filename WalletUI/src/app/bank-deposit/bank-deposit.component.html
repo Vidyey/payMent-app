@@ -1,9 +1,8 @@
-<div style="text-align: center;">
-   
 
-</div>
 
 <div class="container">
+    <div class="hero-image">
+        <div class="hero-text">
     <div class="row">
         <div class="col-md-3">
 
@@ -22,17 +21,23 @@
                                 placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
                     </div> -->
 
-                    <div class="form-group" >
-                        <label for="name"><span class="req">* </span> <b>Amount</b> </label>
-                        <input class="form-control" type="text" [(ngModel)]="amount" name="Name" id="Name"
-                            placeholder="Enter Transfer Amount" required />
-                        <div id="errLast"></div>
+                    <div class="form-group">
+                        <label for="name"><span class="req">* </span> Amount </label>
+                        <input class="form-control" type="text" [(ngModel)]="amount" name="Amount" id="Amount" pattern="[0-9]*"
+                            placeholder="Enter Transfer Amount" required #amtcontrol ="ngModel" [class.is-invalid]="amtcontrol.invalid && amtcontrol.touched" />
+                            <div *ngIf="amtcontrol.invalid && amtcontrol.touched">
+                                <span class="req"><i><small>Enter valid Amount</small></i></span>
+                            </div>
+
                     </div>
                     
                     <div class="form-group">
-                        <label for="Wallet Pin"><span class="req">* </span> <b>Wallet Pin </b> <small> Please Enter Security Pin </small> </label>
-                        <input required type="password" [(ngModel)]="password" name="wallet_Pin" id="Wallet_Pin"
-                            class="form-control phone" maxlength="10" placeholder="Please Enter 4 Digit Pin " />
+                        <label for="Email id"><span class="req">* </span> Pin </label>
+                        <input class="form-control" type="password" [(ngModel)]="password" name="password" id="password" required #pincontrol="ngModel" [class.is-invalid]="pincontrol.invalid && pincontrol.touched"
+                            placeholder="Enter Security Pin" />
+                            <div *ngIf="pincontrol.invalid && pincontrol.touched">
+                                <span class="req"><i><small>Enter valid Security Pin</small></i></span> 
+                            </div>
                     </div>
                     <div class="form-group">
                         <input class="btn btn-success" type="submit" name="submit_Signup" value="Add Balance to Bank" (click)="depositNow()">
@@ -45,5 +50,7 @@
         </div>
 
     </div>
+</div>
+</div>
 </div>
 

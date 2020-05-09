@@ -1,0 +1,29 @@
+package com.EazyPay.demo;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.EazyPay.demo.controller.WalletController;
+import com.EazyPay.demo.entity.Wallet;
+
+@RunWith(SpringRunner.class)
+@DataJpaTest
+@AutoConfigureTestDatabase(replace=Replace.NONE)
+public class testJPA {
+	
+	@Autowired
+	private WalletController Wrepo;
+	
+	@Test
+	public void create() {
+		Wallet w1 = new Wallet();
+		
+	}
+	
+
+}

@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 
 export class Wallet{
   constructor(
-    public mobile_Number:String,
-		public email_id:String,
-    public adhar_Number:String,
-    public name:String,
+    public mobile_Number:string,
+		public email_id:string,
+    public adhar_Number:string,
+    public name:string,
     public wallet_Ammount : string,
     public wallet_Pin:string,
     public transaction : Transacion_Details

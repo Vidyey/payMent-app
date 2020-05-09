@@ -1,6 +1,8 @@
 
 
 <div class="container">
+    <div class="hero-image">
+        <div class="hero-text">
     <div class="row">
         <div class="col-md-3">
             
@@ -15,17 +17,23 @@
                             required*<br></small></span>
                          <label for="Mobile Number"><span class="req">* </span> Mobile Number <small></small> </label>
                                 <input class="form-control" type="text" [(ngModel)]="username" name="username" id="username"
-                                placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
+                                placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required #usernamecontrol ="ngModel" [class.is-invalid]="usernamecontrol.invalid && usernamecontrol.touched"/>
+                                <div *ngIf="usernamecontrol.invalid && usernamecontrol.touched">
+                                    <span class="req"><i><small>Enter valid Mobile Number</small></i></span>
+                                </div>
                     </div>
 
                     <div class="form-group">
                         <label for="Email id"><span class="req">* </span> Pin </label>
-                        <input class="form-control" type="password" [(ngModel)]="password" name="password" id="password" required
+                        <input class="form-control" type="password" [(ngModel)]="password" name="password" id="password" required #pincontrol="ngModel" [class.is-invalid]="pincontrol.invalid && pincontrol.touched"
                             placeholder="Enter Security Pin" />
-                        <div id="errFirst"></div>
+                            <div *ngIf="pincontrol.invalid && pincontrol.touched">
+                                <span class="req"><i><small>Enter valid Security Pin</small></i></span>
+                            </div>
                     </div>
                     <div class="form-group">
                         <input class="btn btn-success" type="submit" name="submit_Signup" value="Login" (click)="checkLogin()">
+                        <span class="text-primary"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/createNewUser" class="nav-link">Create Account</a></span>
                     </div>
                 </fieldset>
             </form>
@@ -34,4 +42,7 @@
             
         </div>
     </div>
+
+</div>
+</div>
 </div>

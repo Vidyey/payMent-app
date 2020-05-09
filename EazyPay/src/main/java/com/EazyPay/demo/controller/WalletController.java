@@ -2,7 +2,9 @@ package com.EazyPay.demo.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.EazyPay.demo.Exception.UserNotFoundException;
+import com.EazyPay.demo.Logger.GlobalLogger;
+import com.EazyPay.demo.Service.EazyPayServiceImpl;
 import com.EazyPay.demo.entity.Transaction_Details;
 
 import com.EazyPay.demo.entity.Wallet;
@@ -23,171 +28,96 @@ import com.EazyPay.demo.repo.WalletRepositoty;
 @RestController
 public class WalletController {
 	
+	private Logger logger=GlobalLogger.getLogger(WalletController.class);
+	
 	@Autowired
-	private WalletRepositoty walletRepositoty;
-	@Autowired
-	private TransactionRepositoty transactionRepositoty;
+	EazyPayServiceImpl wpsi;
+
+@CrossOrigin
+@PostMapping(path="/createNewUser",consumes ="application/json")
+public Wallet addUser(@RequestBody Wallet newuser)
+{
+	String method="addUser(Wallet newuser)";
+	logger.info(method + "called.."); 
 	
-	@CrossOrigin
-	@PostMapping(path="/createNewUser",consumes ="application/json", produces = "application/json")
-	public Wallet addUser(@RequestBody Wallet newuser)
-	{
-		System.out.println(newuser); //
-		newuser.setWallet_Ammount(0);
-		walletRepositoty.save(newuser);
-		return newuser;
-		
-	}
+	return wpsi.addUser(newuser);
 	
-	@GetMapping("/getUser/{Mobile_Number}")
-	public Wallet getUser(@PathVariable String Mobile_Number)
-	{
-			//System.out.println(Mobile_Number);
-			Wallet w1 =  walletRepositoty.getOne(Mobile_Number);
-			System.out.println(w1);
-			return w1;
-	}
+}
+
+@GetMapping("/getUser/{Mobile_Number}")
+public Wallet getUser(@PathVariable String Mobile_Number) throws UserNotFoundException
+{
+	String method="getUser(String Mobile_Number)";
+	logger.info(method + "called.."); 	
 	
-	
-	
-	@PutMapping("/updateUser")
-	public Wallet updateUser(@RequestBody Wallet newuser)
-	{
+		Wallet w1 =  wpsi.getUser(Mobile_Number);
 		
-		walletRepositoty.save(newuser);
-		return newuser;
-		
-	}
-	
-	@PutMapping("/fundTransfer/{send_upi_id}/{rec_upi_id}/{ammount}/{caption}")
-	public String transferFund (@PathVariable("send_upi_id") String send_upi_id,@PathVariable("rec_upi_id") String rec_upi_id, @PathVariable int ammount, @PathVariable String caption) 
-	{
-		
-		Wallet send = walletRepositoty.getOne(send_upi_id);
-		
-		System.out.println("this is sending onj :- "+send);
-		Wallet rec = walletRepositoty.getOne(rec_upi_id);
-		
-		System.out.println("this is reciver :- "+ rec);
-		
-		if ( send.getWallet_Ammount() >= ammount) {
-		
-		String id = send_upi_id+"#"+Calendar.getInstance().getTime()+"#"+rec_upi_id;
-		
-		//---------------- debit process --------------
-		Transaction_Details sendbal = new Transaction_Details(id,ammount, caption, Calendar.getInstance().getTime());
-		send.setWallet_Ammount(send.getWallet_Ammount() - sendbal.getT_ammount());
-		
-		List<Transaction_Details> t = send.getTransaction();
-		t.add(sendbal);
-		send.setTransaction(t);
-		
-		transactionRepositoty.save(sendbal);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// ----------------credit process-------------------------
-		String id1 = send_upi_id+"#"+Calendar.getInstance().getTime()+"#"+rec_upi_id;
-		Transaction_Details recbal = new Transaction_Details(id1,ammount, caption, Calendar.getInstance().getTime());
-		
-		rec.setWallet_Ammount(rec.getWallet_Ammount() + recbal.getT_ammount());
-		
-		
-		
-		List<Transaction_Details> t2 = rec.getTransaction();
-		t2.add(recbal);
-		rec.setTransaction(t2);
-		
-		
-		transactionRepositoty.save(recbal);
-		//----------------------------------------------------
-		
-		//wallet update
-		
-		walletRepositoty.save(send);
-		walletRepositoty.save(rec);
-	
-		return "fund transfer successful";
-		}
-		else
+		if (w1==null)
 		{
-			return "transaction failed  'Unsufficient balance'. ";
+			throw new UserNotFoundException("user not found");
 		}
 		
-		
-	}
+		return w1;
+}
+ 
 
+
+@PutMapping("/updateUser")
+public Wallet updateUser(@RequestBody Wallet newuser)
+{
+	String method="updateUser(Wallet newuser)";
+	logger.info(method + "called.."); 
 	
-	@PutMapping("/addBalanceToWallet/{Mobile_Number}/{ammount}")
-
-	public String addBalanceToWallet(@PathVariable("Mobile_Number") String upi_id, @PathVariable int ammount)
-	{
-		Wallet w1 = walletRepositoty.getOne(upi_id);
-		
-		String id = upi_id+"#"+Calendar.getInstance().getTime()+"#balanceAdded";
-		
-		Transaction_Details addbal = new Transaction_Details(id,ammount, "wallet_balance_added", Calendar.getInstance().getTime());
-		
-		w1.setWallet_Ammount(w1.getWallet_Ammount() + addbal.getT_ammount());
-		List<Transaction_Details> t = w1.getTransaction();
-		t.add(addbal);
-		w1.setTransaction(t);
-		
-		transactionRepositoty.save(addbal);
-		walletRepositoty.save(w1);
-		
-		return "Balance added to Wallet successful...";
-		
-		
-		
-	}
+	return wpsi.updateUser(newuser);
 	
-	@GetMapping("/getTransaction/{Mobile_Number}")
-	public List<Transaction_Details> getTransaction(@PathVariable("Mobile_Number") String upi_id)
-	{
-		
-		  Wallet w1 = walletRepositoty.getOne(upi_id); 
-		  return w1.getTransaction();
-		 
-		 
-		
-	}
+}
 
-
-	@PutMapping("/BankDeposit/{upi_id}/{ammount}")
-	public String addBalanceToBank(@PathVariable String upi_id, @PathVariable int ammount )
-	{
-		
+@PutMapping("/fundTransfer/{send_upi_id}/{rec_upi_id}/{ammount}/{caption}")
+public String transferFund (@PathVariable("send_upi_id") String send_upi_id,@PathVariable("rec_upi_id") String rec_upi_id, @PathVariable int ammount, @PathVariable String caption) 
+{
+	String method="transferFund(String send_upi_id,String rec_upi_id,int ammount, String caption)";
+	logger.info(method + "called.."); 
 	
-		
-		Wallet w1 = walletRepositoty.getOne(upi_id);
-		
-		if (w1.getWallet_Ammount()>=ammount)
-		{
+	return wpsi.transferFund(send_upi_id, rec_upi_id, ammount, caption);
+	
+	
+}
 
-		String id = upi_id+"#"+Calendar.getInstance().getTime()+"#bankDeposited";
 
-		Transaction_Details addbal = new Transaction_Details(id,ammount, "wallet_balance_Deposited", Calendar.getInstance().getTime());
+@PutMapping("/addBalanceToWallet/{Mobile_Number}/{ammount}")
 
-		w1.setWallet_Ammount(w1.getWallet_Ammount() - addbal.getT_ammount());
-		List<Transaction_Details> t = w1.getTransaction();
-		t.add(addbal);
-		w1.setTransaction(t);
-		transactionRepositoty.save(addbal);
-		walletRepositoty.save(w1);
-		return "Balance added to Bank successful...";
-		}
-		else
-		{
-			return "Unsufficient balance...";
-		}
-		
-		
-	}
+public String addBalanceToWallet(@PathVariable("Mobile_Number") String upi_id, @PathVariable int ammount)
+{
+	String method="addBalanceToWallet(String upi_id,int ammount)";
+	logger.info(method + "called.."); 	
+	
+	return wpsi.addBalanceToWallet(upi_id, ammount);
+	
+	
+	
+}
+
+@GetMapping("/getTransaction/{Mobile_Number}")
+public List<Transaction_Details> getTransaction(@PathVariable("Mobile_Number") String upi_id)
+{
+	String method="getTransaction(String upi_id)";
+	logger.info(method + "called.."); 	
+			 
+	return wpsi.getTransaction(upi_id); 
+	
+}
+
+
+@PutMapping("/BankDeposit/{upi_id}/{ammount}")
+public String addBalanceToBank(@PathVariable String upi_id, @PathVariable int ammount )
+{
+	String method="addBalanceToBank(String upi_id,int ammount)";
+	logger.info(method + "called.."); 	
+	
+	return wpsi.addBalanceToBank(upi_id, ammount);
+	
+	
+}
 
 
 }

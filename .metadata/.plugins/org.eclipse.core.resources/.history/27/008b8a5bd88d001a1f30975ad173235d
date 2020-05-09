@@ -1,0 +1,52 @@
+package com.EazyPay.demo.Service;
+
+import java.util.List;
+
+import com.EazyPay.demo.entity.Transaction_Details;
+import com.EazyPay.demo.entity.Wallet;
+
+public class WalletPayServiceImpl implements WalletPayService {
+
+	@Override
+	public Wallet addUser(Wallet newuser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Wallet getUser(String Mobile_Number) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Wallet updateUser(Wallet newuser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String transferFund(String send_upi_id, String rec_upi_id, int ammount, String caption) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String addBalanceToWallet(String upi_id, int ammount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Transaction_Details> getTransaction(String upi_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String addBalanceToBank(String upi_id, int ammount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

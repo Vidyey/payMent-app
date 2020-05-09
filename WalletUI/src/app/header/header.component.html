@@ -4,15 +4,36 @@
     <div><a href="#" class="navbar-brand"><img src="assets/logo/l2.jpg" alt="John" width="70" height="70"  class="center"></a></div>
     
     <ul class="navbar-nav">
+      <fieldset *ngIf="!loginService.isUserLoggedIn()">
        
       <!-- <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/" class="nav-link">View Employees</a></li>
       <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/addemployee" class="nav-link">Add New Employee</a></li> -->
-      <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
-      <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/cre  ateNewUser/login" class="nav-link">SignUp</a></li>
-
-      <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
-    
+      <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li></fieldset>
+      <fieldset *ngIf="!loginService.isUserLoggedIn()">
+      <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/createNewUser" class="nav-link">SignUp</a></li>
+    </fieldset>
+    <fieldset *ngIf="loginService.isUserLoggedIn()">
+      <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut    </a></li>
+    </fieldset>
     </ul>
+    <div class="user123" *ngIf="loginService.isUserLoggedIn()">
+     <fieldset>Welcome <b>{{name}}</b></fieldset>  
+        <!-- Mobile Number :- {{user}} -->
+
+      
+    </div>
+    <div class="user123" *ngIf="loginService.isUserLoggedIn()">
+      <fieldset>Mobile Number :- <b>{{user}}</b></fieldset>  
+         <!--  -->
+ 
+       
+     </div>
+    
       </nav>
+      <div class="row">
+      <div class="col-md-3"></div>
+      
+      <div class="col-md-3"></div>
+    </div>
 </header>
 </div>

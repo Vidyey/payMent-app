@@ -1,8 +1,10 @@
 <div class="container">
+  <div class="hero-image">
+    
 <div class="col-md-12">
   <div class="row"><div class="col-md-8"><b>Transaction Details of account :-  {{user}}</b></div>
   <div class="col-md-2"><button class="btn" (click)="showTransaction()"><i class="fa fa-refresh"> Refresh</i></button></div>
-  <div class="col-md-2"><button class="btn" (click)="showTransaction()"><i class="fa fa-home"> Home</i></button></div>
+  <div class="col-md-2"><button class="btn" routerLink="/home"><i class="fa fa-home"> Home</i></button></div>
 
   </div>
   <fieldset>
@@ -29,4 +31,5 @@
       </table>
       <!-- <button class="btn btn-danger" (click)="deleteEmployee(employee)"> Delete Employee</button> -->
     </fieldset></div>
+</div>
 </div>

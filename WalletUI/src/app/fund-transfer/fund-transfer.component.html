@@ -1,9 +1,8 @@
-<div style="text-align: center;">
 
-{{user}}
-</div>
 
 <div class="container">
+    <div class="hero-image">
+        <div class="hero-text">
     <div class="row">
         <div class="col-md-3">
             
@@ -13,26 +12,30 @@
                 <fieldset>
                     <legend class="text-center">Fund Transfer</legend>
 
-                    <span class="req"><small>
-                        required*<br></small></span>
-                    <!-- <div class="form-group">
-                        
-                         <label for="Mobile Number"><span class="req">* </span> Wallet Mobile Number <small>Please Enter Your Wallet Mobile Number.</small> </label>
-                                <input class="form-control" type="text" [(ngModel)]="wallet1.mobile_Number" name="mobile_Number" id="MobileNumber"
-                                placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
-                    </div> -->
 
-                    <div class="form-group">
-                        <label for="Mobile Number"><span class="req">* </span> Receiver Mobile Number <small>Please Enter Your Receiver Mobile Number.</small> </label>
-                        <input class="form-control" type="text" [(ngModel)]="receiver" name="mobile_Number" id="ReceiverNumber"
-                        placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required />
-                    </div>
+                        
+
+                        <div class="form-group">
+                            <span class="req"><small>
+                                required*<br></small></span>
+                             <label for="Mobile Number"><span class="req">* </span> Mobile Number <small></small> </label>
+                                    <input class="form-control" type="text" [(ngModel)]="receiver" name="username" id="username" pattern="[0-9]*"
+                                    placeholder="Enter your 10 digit Mobile Number (xxxxxxxxx)" required #usernamecontrol ="ngModel" [class.is-invalid]="usernamecontrol.invalid && usernamecontrol.touched"/>
+                                    <div *ngIf="usernamecontrol.invalid && usernamecontrol.touched">
+                                        <span class="req"><i><small>Enter valid Mobile Number</small></i></span>
+                                    </div>
+                        </div>
+                    
+                    
 
                     <div class="form-group">
                         <label for="name"><span class="req">* </span> Amount </label>
-                        <input class="form-control" type="text" [(ngModel)]="amount" name="Amount" id="Amount"
-                            placeholder="Enter Transfer Amount" required />
-                        <div id="errLast"></div>
+                        <input class="form-control" type="text" [(ngModel)]="amount" name="Amount" id="Amount" pattern="[0-9]*"
+                            placeholder="Enter Transfer Amount" required #amtcontrol ="ngModel" [class.is-invalid]="amtcontrol.invalid && amtcontrol.touched" />
+                            <div *ngIf="amtcontrol.invalid && amtcontrol.touched">
+                                <span class="req"><i><small>Enter valid Amount</small></i></span>
+                            </div>
+                            
                     </div>
 
                     <div class="form-group">
@@ -44,10 +47,12 @@
 
                     
                     <div class="form-group">
-                        <label for="Adhar Number"><span class="req">* </span> Wallet-Pin : </label>
-                        <input class="form-control" type="password" [(ngModel)]="password" name="Wpin" id="wpin"
-                            placeholder="Security Code" required />
-                        <div id="errLast"></div>
+                        <label for="Email id"><span class="req">* </span> Pin </label>
+                        <input class="form-control" type="password" [(ngModel)]="password" name="password" id="password" required #pincontrol="ngModel" [class.is-invalid]="pincontrol.invalid && pincontrol.touched"
+                            placeholder="Enter Security Pin" />
+                            <div *ngIf="pincontrol.invalid && pincontrol.touched">
+                                <span class="req"><i><small>Enter valid Security Pin</small></i></span> 
+                            </div>
                     </div>
                     <div class="form-group">
                         <input class="btn btn-success" type="submit" name="submit_Signup" value="Pay Amount" (click)="fundtransferNow()">
@@ -61,3 +66,6 @@
         </div>
     </div>
 </div>
+</div>
+</div>
+

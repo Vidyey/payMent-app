@@ -1,0 +1,5 @@
+package com.EazyPay.demo.dao;
+
+public interface WalletPayDao {
+
+}

@@ -1,0 +1,9 @@
+1588598640517	Delete element
+1588608520098	Delete element
+1588620416212	Rename type 'WalletPayDao'
+1588620445497	Rename type 'WalletPayDaoImpl'
+1588620478488	Move compilation unit
+1588620513129	Move compilation unit
+1588620526853	Move compilation unit
+1588620569301	Rename type 'WalletPayService'
+1588620601437	Rename type 'WalletPayServiceImpl'
